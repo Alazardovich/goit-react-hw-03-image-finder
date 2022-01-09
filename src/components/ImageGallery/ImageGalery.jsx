@@ -16,5 +16,7 @@ const ImageGallery = ({ images, onToggleModal }) => {
     </ul>
   );
 };
-
+ImageGallery.defaultProp = {
+  images: [],
+};
 export default ImageGallery;
