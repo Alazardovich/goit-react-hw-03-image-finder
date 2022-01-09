@@ -3,12 +3,16 @@ import { FiSearch } from "react-icons/fi";
 import PropTypes from "prop-types";
 import { Header, Form, Input, Button } from "./CSSSeachBar";
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar = ({ onSubmit, query }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const searchQuery = event.currentTarget.elements.query.value;
     if (searchQuery.trim() === "") {
       toast.info("Введите название!");
+      return;
+    }
+    if (searchQuery.trim() === query) {
+      toast.error("Введите название!");
       return;
     }
     onSubmit(searchQuery);

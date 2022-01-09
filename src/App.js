@@ -64,13 +64,14 @@ class App extends Component {
       error,
       images,
       isLoading,
+      searchQuery,
       selectImage: { url, alt },
     } = this.state;
     const showButtonLoad = images.length > 0 && !isLoading;
     return (
       <>
         {error && <p>Whoops, something went wrong: {error.message}</p>}
-        <SearchBar onSubmit={this.setSearchQuery} />
+        <SearchBar onSubmit={this.setSearchQuery} query={searchQuery} />
 
         {showModal && (
           <Modal onClose={this.toggleModal}>
