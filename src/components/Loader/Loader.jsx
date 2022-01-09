@@ -1,18 +1,19 @@
 import { Circles } from "react-loader-spinner";
+import { ContainerLoad } from "./CSSContainerLoad";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Loading = () => {
   return (
-    <div>
+    <ContainerLoad>
       <Circles
         type="Circles"
-        color="#00BFFF"
-        height={80}
-        width={80}
+        color="#0f12c7"
+        height={180}
+        width={180}
         arialLabel="loading"
       />
       Loading...
-    </div>
+    </ContainerLoad>
   );
 };
 export default Loading;

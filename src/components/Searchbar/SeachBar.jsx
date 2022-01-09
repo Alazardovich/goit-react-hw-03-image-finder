@@ -1,5 +1,7 @@
 import { toast } from "react-toastify";
 import { FiSearch } from "react-icons/fi";
+import PropTypes from "prop-types";
+import { Header, Form, Input, Button } from "./CSSSeachBar";
 
 const SearchBar = ({ onSubmit }) => {
   const handleSubmit = (event) => {
@@ -13,14 +15,14 @@ const SearchBar = ({ onSubmit }) => {
     event.currentTarget.reset();
   };
   return (
-    <header className="searchbar">
-      <form className="form" onSubmit={handleSubmit}>
-        <button type="submit" className="button">
+    <Header className="searchbar">
+      <Form className="form" onSubmit={handleSubmit}>
+        <Button type="submit" className="button">
           <FiSearch style={{ marginRight: 4 }} />
           <span className="button-label">Search</span>
-        </button>
+        </Button>
 
-        <input
+        <Input
           className="input"
           type="text"
           name="query"
@@ -28,8 +30,11 @@ const SearchBar = ({ onSubmit }) => {
           autoFocus
           placeholder="Search images and photos"
         />
-      </form>
-    </header>
+      </Form>
+    </Header>
   );
+};
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 export default SearchBar;

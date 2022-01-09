@@ -9,7 +9,7 @@ import ImageGallery from "./components/ImageGallery/ImageGalery";
 import LoadButton from "./components/Button/LoadButton";
 import Loading from "./components/Loader/Loader";
 import imagesFetch from "../src/utils/apiFetch";
-import { ReactComponent as IconButton } from "../src/icons/loading-svgrepo-com.svg";
+// import { ReactComponent as IconButton } from "../src/icons/loading-svgrepo-com.svg";
 
 class App extends Component {
   state = {
@@ -50,35 +50,6 @@ class App extends Component {
       .finally(() => this.setState({ isLoading: false }));
     console.log("button:", this.state.images);
   };
-  // async componentDidMount() {
-  //   const { searchQuery, pageCounter } = this.state;
-  //   const options = { searchQuery, pageCounter };
-  //   this.setState({ isLoading: true, searchQuery: null });
-  //   imagesFetch
-  //     .getFetch(options)
-  //     .catch((error) => this.setState({ error }))
-  //     .finally(() => this.setState({ isLoading: false }));
-  //   console.log("this.state.images-componentDidMount");
-  // }
-
-  // async componentDidUpdate(_, prevState) {
-  //   const { searchQuery, pageCounter } = this.state;
-  //   const options = { searchQuery, pageCounter };
-  //   if (prevState.searchQuery !== this.state.searchQuery) {
-  //     imagesFetch.getFetch(options);
-  //     console.log("this.state.images-componentDidUpdate");
-  //   }
-  //   // if (this.state.searchQuery) {
-  //   //   this.getFetch().then((hits) =>
-  //   //     this.setState((prevState) => ({
-  //   //       images: [...prevState.images, ...hits],
-  //   //       pageCounter: prevState.pageCounter++,
-  //   //     }))
-  //   //   );
-
-  //   console.log("componentDidUpdate");
-  //   // }
-  // }
 
   toggleModal = (url, alt) => {
     this.setState((prevState) => ({
@@ -90,13 +61,15 @@ class App extends Component {
   render() {
     const {
       showModal,
+      error,
       images,
       isLoading,
       selectImage: { url, alt },
     } = this.state;
-    const shouldRenderLoadButton = images.length > 0 && !isLoading;
+    const showButtonLoad = images.length > 0 && !isLoading;
     return (
       <>
+        {error && <p>Whoops, something went wrong: {error.message}</p>}
         <SearchBar onSubmit={this.setSearchQuery} />
 
         {showModal && (
@@ -104,13 +77,14 @@ class App extends Component {
             <img src={url} alt={alt} width="900" height="600" />
           </Modal>
         )}
-        {shouldRenderLoadButton && (
-          <LoadButton onClick={this.fetchImages} aria-label="Loading">
-            <IconButton width="40" height="40" />
-          </LoadButton>
-        )}
+
         {isLoading && <Loading />}
         <ImageGallery images={images} onToggleModal={this.toggleModal} />
+        {showButtonLoad && (
+          <LoadButton onClick={this.fetchImages} aria-label="Loading">
+            Download Images?
+          </LoadButton>
+        )}
         <ToastContainer autoClose={3000} theme="colored" />
       </>
     );
@@ -118,15 +92,3 @@ class App extends Component {
 }
 
 export default App;
-// getFetch = async () => {
-//   const key = "25086099-6b4cd53466fa2409daa271784";
-//   const url = `https://pixabay.com/api/?q=${
-//     this.state.searchQuery ?? "cat"
-//   }&${
-//     this.pageCounter
-//   }&key=${key}&image_type=photo&orientation=horizontal&per_page=12`;
-//   const { data } = await axios.get(url);
-//   const hits = data.hits;
-//   this.setState({ images: hits });
-//   console.log("this.state.images = button");
-// };

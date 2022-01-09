@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Button } from "./CSSButtonLoad";
 
 const LoadButton = ({ children, onClick, ...allyProps }) => {
   window.scrollTo({
@@ -6,9 +7,11 @@ const LoadButton = ({ children, onClick, ...allyProps }) => {
     behavior: "auto",
   });
   return (
-    <button type="button" onClick={onClick} {...allyProps}>
-      {children}
-    </button>
+    <div>
+      <Button type="button" onClick={onClick} {...allyProps}>
+        {children}
+      </Button>
+    </div>
   );
 };
 

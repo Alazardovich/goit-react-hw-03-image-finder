@@ -1,7 +1,10 @@
+import PropTypes from "prop-types";
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
+import { ListItem } from "./CSSListGallery";
+
 const ImageGallery = ({ images, onToggleModal }) => {
   return (
-    <ul className="gallery">
+    <ListItem>
       {images.map((image) => {
         return (
           <ImageGalleryItem
@@ -13,10 +16,21 @@ const ImageGallery = ({ images, onToggleModal }) => {
           />
         );
       })}
-    </ul>
+    </ListItem>
   );
 };
 ImageGallery.defaultProp = {
   images: [],
+};
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  ),
+  onToggleModal: PropTypes.func.isRequired,
 };
 export default ImageGallery;
