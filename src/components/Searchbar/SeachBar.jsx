@@ -12,7 +12,7 @@ const SearchBar = ({ onSubmit, query }) => {
       return;
     }
     if (searchQuery.trim() === query) {
-      toast.error("Введите название!");
+      toast.error("Введите новое название!");
       return;
     }
     onSubmit(searchQuery);
