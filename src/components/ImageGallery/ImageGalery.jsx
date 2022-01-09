@@ -8,7 +8,7 @@ const ImageGallery = ({ images, onToggleModal }) => {
             key={image.id}
             url={image.webformatURL}
             alt={image.tags}
-            largeIMG={image.largeImageURL}
+            onlargeImg={image.largeImageURL}
             onToggle={onToggleModal}
           />
         );
