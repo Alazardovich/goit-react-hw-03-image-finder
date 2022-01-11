@@ -4,7 +4,7 @@ import { Button } from "./CSSButtonLoad";
 const LoadButton = ({ children, onClick, ...allyProps }) => {
   window.scrollTo({
     top: document.documentElement.scrollHeight,
-    behavior: "auto",
+    behavior: "smooth",
   });
   return (
     <div>

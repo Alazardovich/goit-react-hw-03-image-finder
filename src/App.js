@@ -26,6 +26,12 @@ class App extends Component {
     if (prevState.searchQuery !== this.state.searchQuery) {
       this.fetchImages();
     }
+    if (
+      prevState.searchQuery === this.state.searchQuery &&
+      prevState.pageCounter !== this.state.pageCounter
+    ) {
+      this.fetchImages();
+    }
   }
 
   setSearchQuery = (searchQuery) => {
@@ -41,7 +47,7 @@ class App extends Component {
       .then((hits) =>
         this.setState((prevState) => ({
           images: [...prevState.images, ...hits],
-          pageCounter: prevState.pageCounter + 1,
+          // pageCounter: prevState.pageCounter + 1,
         }))
       )
       .catch((error) => {
@@ -50,6 +56,10 @@ class App extends Component {
       .finally(() => this.setState({ isLoading: false }));
     console.log("button:", this.state.images);
   };
+  onChangeCounter = () =>
+    this.setState((prevState) => ({
+      pageCounter: prevState.pageCounter + 1,
+    }));
 
   toggleModal = (url, alt) => {
     this.setState((prevState) => ({
@@ -82,7 +92,7 @@ class App extends Component {
         {isLoading && <Loading />}
         <ImageGallery images={images} onToggleModal={this.toggleModal} />
         {showButtonLoad && (
-          <LoadButton onClick={this.fetchImages} aria-label="Loading">
+          <LoadButton onClick={this.onChangeCounter} aria-label="Loading">
             Download Images?
           </LoadButton>
         )}
